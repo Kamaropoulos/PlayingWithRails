@@ -61,7 +61,11 @@ class ItemsController < ApplicationController
         end
 
         def find_item
-            @item = Item.find(params[:id])            
+            @item = Item.find(params[:id])  
+            
+            rescue ActiveRecord::RecordNotFound
+                redirect_to root_path, alert: "Item was not found."
+
         end
 
         def check_login
