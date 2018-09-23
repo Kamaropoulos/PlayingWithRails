@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
     before_action :find_item, only: [:show, :edit, :update, :destroy]
+    before_action :check_login, only: [:show, :new, :create, :edit, :update, :destroy, :complete, :uncheck]
 
     def index
         if user_signed_in?
@@ -63,6 +64,9 @@ class ItemsController < ApplicationController
             @item = Item.find(params[:id])            
         end
 
-
-
+        def check_login
+            if !user_signed_in?
+                redirect_to new_user_session_path, alert: "You have to sign in first!"
+            end
+        end
 end
