@@ -1,11 +1,10 @@
 class ItemsController < ApplicationController
-    before_action :find_item, only: [:show, :edit, :update, :destroy]
     before_action :check_login, only: [:show, :new, :create, :edit, :update, :destroy, :complete, :uncheck]
+    before_action :find_item, only: [:show, :edit, :update, :destroy]
 
     def index
         if user_signed_in?
             @items = Item.where(:user_id => current_user.id).order("created_at DESC")
-    
         end
     end
 
@@ -61,7 +60,13 @@ class ItemsController < ApplicationController
         end
 
         def find_item
-            @item = Item.find(params[:id])  
+            @itemFound = Item.find(params[:id])  
+
+            if @itemFound.user_id == current_user.id
+                @item = @itemFound
+            else
+                redirect_to root_path, alert: "Item was not found."
+            end
             
             rescue ActiveRecord::RecordNotFound
                 redirect_to root_path, alert: "Item was not found."
