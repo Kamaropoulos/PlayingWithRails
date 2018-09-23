@@ -1,7 +1,14 @@
 <div class="col-md-6 col-md-offset-3">
-    <h2><%= @item.title %></h2>
-    <p><%= @item.description %></p>
+    <div class="row item">
+        <div class="col-md-10">
+            <h2 class="item-title"><%= @item.title %></h2>
+            <p class="item-desc item-sub-title"><%= @item.description %></p>
+        </div>
 
-    <%= link_to 'Back', root_path %>
-    <%= link_to 'Edit', edit_item_path(@item) %>
+        <div class="col-md-2">
+            <%= link_to edit_item_path(@item) do %>
+                <i class="fa fa-lg fa-edit check"></i>
+            <% end %>
+        </div>
+    </div>
 </div>
