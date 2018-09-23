@@ -48,6 +48,12 @@ class ItemsController < ApplicationController
         redirect_to root_path
     end
 
+    def uncheck
+        @item = Item.find(params[:id])
+        @item.update_attribute(:completed_at, nil)
+        redirect_to root_path
+    end
+
     private
         def item_params
             params.require(:item).permit(:title, :description)

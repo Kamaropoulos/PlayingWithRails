@@ -106,3 +106,15 @@ a {
     background-color: #454545;
     border-bottom: 2px solid #2f2e2e;
   }
+
+  .delete:hover {
+    color: red;
+  }
+
+  .check:hover {
+    color: green;
+  }
+
+  .add:hover {
+      color: lightseagreen;
+  }
